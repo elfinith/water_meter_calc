@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">water_meter_calc</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Расчёт воды</string>
+    <string name="textKitchen">Кухня</string>
+	<string name="textKOld">Старые</string>
+	<string name="textKNew">Новые</string>
+	<string name="textBathroom">Ванная</string>		
+	<string name="textBOld">Старые</string>
+	<string name="textBNew">Новые</string>
+	<string name="textPrice">Цена</string>
+	<string name="textPRub">Руб/куб.м</string>
+	<string name="textResult">ИТОГ</string>
+	<string name="textRRub">Руб</string>	
+		
+		
+		
+	
+			
+
 
 </resources>
