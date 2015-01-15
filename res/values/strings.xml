@@ -13,6 +13,8 @@
 	<string name="textResult">ИТОГ</string>
 	<string name="textRRub">Руб</string>	
 	<string name="buttonCalc">Произвести расчёт</string>	
+	<string name="buttonClearData">Очистить данные</string>
+	<string name="buttonSaveData">Сохранить данные</string>		
 		
 		
 		

@@ -2,7 +2,28 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"> 
+	android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <Button
+            android:id="@+id/buttonClearData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_weight="1"            
+            android:text="@string/buttonClearData">             			
+        </Button>
+        <Button
+            android:id="@+id/buttonSaveData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_weight="1"            
+            android:text="@string/buttonSaveData">
+		</Button>            
+
+    </LinearLayout>
+ 
 	<TextView
 		android:id="@+id/textKitchen"
 		android:layout_width="match_parent"
