@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -26,6 +27,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		editBOCold, editBOHot, 	editBNCold, editBNHot,
 		editPriceCold, editPriceHot, editResultCold, editResultHot;
 
+	TextView textOvlValue;
+	
 	Button btnCalc, btnClearData, btnSaveData;
 	
 	float fKOCold, fKOHot, 	fKNCold, fKNHot,
@@ -75,7 +78,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		editResultCold = (EditText) findViewById(R.id.editResultCold);		
 		editResultHot = (EditText) findViewById(R.id.editResultHot);
 		btnClearData = (Button) findViewById(R.id.buttonClearData); 
-		btnSaveData = (Button) findViewById(R.id.buttonSaveData);		
+		btnSaveData = (Button) findViewById(R.id.buttonSaveData);
+		textOvlValue = (TextView) findViewById(R.id.textOverallValue);
 		// навешиваем обработчик
 		btnCalc.setOnClickListener(this);
 		btnClearData.setOnClickListener(this);		
@@ -87,7 +91,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	    editBOCold.setText(sData.getString(BATHROOM_COLD, ""));
 	    editBOHot.setText(sData.getString(BATHROOM_HOT, ""));
 	    editPriceCold.setText(sData.getString(PRICE_COLD, ""));
-	    editPriceHot.setText(sData.getString(PRICE_HOT, ""));	    
+	    editPriceHot.setText(sData.getString(PRICE_HOT, ""));
 	}
 	
 	// общий обработчик нажатия кнопок
@@ -111,7 +115,8 @@ public class MainActivity extends Activity implements OnClickListener {
     		iResHot = Math.round(((fKNHot - fKOHot) * fPHot) + ((fBNHot - fBOHot) * fPHot));
     		// вывод данных на форму
     		editResultCold.setText(Integer.toString(iResCold));
-    		editResultHot.setText(Integer.toString(iResHot));	    		
+    		editResultHot.setText(Integer.toString(iResHot));
+    		textOvlValue.setText(Integer.toString(iResCold + iResHot));
 	      	break;
 	    case R.id.buttonClearData:
 	    	// обнуление

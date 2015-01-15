@@ -14,12 +14,9 @@
 	<string name="textRRub">Руб</string>	
 	<string name="buttonCalc">Произвести расчёт</string>	
 	<string name="buttonClearData">Очистить данные</string>
-	<string name="buttonSaveData">Сохранить данные</string>		
-		
-		
-		
-	
-			
-
+	<string name="buttonSaveData">Сохранить данные</string>				
+	<string name="textOverall">Итоговая сумма</string>	
+	<string name="cold">холодная</string>		
+	<string name="hot">горячая</string>
 
 </resources>

@@ -23,12 +23,49 @@
 		</Button>            
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="0.5in"
+            android:layout_height="wrap_content"
+			android:layout_weight="1">            
+        </TextView>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:background="@color/cold"            
+			android:text="@string/cold"
+			android:gravity="center"
+			android:textAlignment="gravity"			
+			android:layout_weight="3">
+        </TextView>        
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:background="@color/hot"
+			android:text="@string/hot"
+			android:gravity="center"
+			android:textAlignment="gravity"			
+			android:layout_weight="3">            
+        </TextView>        
+
+    </LinearLayout>
  
 	<TextView
-		android:id="@+id/textKitchen"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="@string/textKitchen">				
+	    android:id="@+id/textKitchen"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+		android:gravity="center"	    
+		android:textSize="25dip"	    
+	    android:text="@string/textKitchen" >
+				
 	</TextView>
 	<LinearLayout
 	    android:layout_width="match_parent"
@@ -37,7 +74,7 @@
 		<TextView
 			android:id="@+id/textKOld"
 			android:layout_width="0.5in"
-			android:layout_height="wrap_content"
+			android:layout_height="wrap_content"			
 			android:layout_weight="1"			
 			android:text="@string/textKOld">
 		</TextView>			
@@ -45,12 +82,16 @@
  			android:id="@+id/editKitchenOldCold"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>
 	    <EditText
  			android:id="@+id/editKitchenOldHot"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3">			
 		</EditText>    
 	</LinearLayout>
@@ -69,12 +110,16 @@
  			android:id="@+id/editKitchenNewCold"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>
 	    <EditText
  			android:id="@+id/editKitchenNewHot"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>    
 	</LinearLayout>
@@ -83,6 +128,8 @@
 		android:id="@+id/textBathroom"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:gravity="center"		
+		android:textSize="25dip"		
 		android:text="@string/textBathroom">		
 	</TextView>
 	<LinearLayout
@@ -100,12 +147,16 @@
  			android:id="@+id/editBathroomOldCold"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3">	
 		</EditText>
 	    <EditText
  			android:id="@+id/editBathroomOldHot"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>    
 	</LinearLayout>
@@ -124,12 +175,16 @@
  			android:id="@+id/editBathroomNewCold"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>
 	    <EditText
  			android:id="@+id/editBathroomNewHot"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>    
 	</LinearLayout>
@@ -138,7 +193,9 @@
 	<TextView
 		android:id="@+id/textPrice"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"		
+		android:layout_height="wrap_content"
+		android:gravity="center"		
+		android:textSize="25dip"				
 		android:text="@string/textPrice">
 	</TextView>
 		
@@ -157,12 +214,16 @@
  			android:id="@+id/editPriceCold"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>
 	    <EditText
  			android:id="@+id/editPriceHot"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>			    
 	</LinearLayout>
@@ -178,6 +239,8 @@
 		android:id="@+id/textResult"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:gravity="center"		
+		android:textSize="25dip"		
 		android:text="@string/textResult">
 	</TextView>
 	
@@ -196,14 +259,40 @@
  			android:id="@+id/editResultCold"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:background="@color/cold"
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>
 	    <EditText
  			android:id="@+id/editResultHot"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
+			android:background="@color/hot" 			
+			android:gravity="center"
+			android:textAlignment="gravity"
 			android:layout_weight="3"> 			
 		</EditText>			    
 	</LinearLayout>
+
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" >
+
+			<TextView
+			    android:id="@+id/textOverall"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:layout_weight="1"			    
+			    android:text="@string/textOverall">
+			</TextView>
+			<TextView
+			    android:id="@+id/textOverallValue"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:gravity="center"			    
+				android:layout_weight="3">			    
+			</TextView>
+		</LinearLayout>
 	
 </LinearLayout>
