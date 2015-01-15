@@ -145,6 +145,13 @@
 			android:layout_weight="3"> 			
 		</EditText>			    
 	</LinearLayout>
+
+	<Button
+	    android:id="@+id/buttonCalc"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/buttonCalc"> 
+	 </Button>
 				
 	<TextView
 		android:id="@+id/textResult"
