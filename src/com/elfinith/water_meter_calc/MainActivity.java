@@ -1,9 +1,12 @@
 package com.elfinith.water_meter_calc;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,13 +24,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	final String BATHROOM_HOT = "bathroom_hot";	
 	final String PRICE_COLD = "price_cold";	
 	final String PRICE_HOT = "price_hot";	
+	final String DATE = "date";	
 	
 	EditText 
 		editKOCold, editKOHot, editKNCold, editKNHot,
 		editBOCold, editBOHot, 	editBNCold, editBNHot,
 		editPriceCold, editPriceHot, editResultCold, editResultHot;
 
-	TextView textOvlValue;
+	TextView textOvlValue, textOldDate;
 	
 	Button btnCalc, btnClearData, btnSaveData;
 	
@@ -47,17 +51,18 @@ public class MainActivity extends Activity implements OnClickListener {
         return true;
     }	
 	
-	// проверка корректности введённых данных
-	public boolean checkNInput() {		
-		if (checkString(editKNCold.getText().toString()) 
-		&& checkString(editKNHot.getText().toString())
-		&& checkString(editBNCold.getText().toString()) 
-		&& checkString(editBNHot.getText().toString())) {
-            return true;			
-		} else {
-            return false;			
-		}
-    }	
+	// проверка корректности новых данных
+	public boolean checkNewInput() {
+		return checkString(editKNCold.getText().toString()) && checkString(editKNHot.getText().toString())
+			&& checkString(editBNCold.getText().toString()) && checkString(editBNHot.getText().toString()); 
+    }
+	
+	// проверка корректности всех данных
+	public boolean checkAllInput() {
+		return checkNewInput() && checkString(editKOCold.getText().toString()) && checkString(editKOHot.getText().toString())
+			&& checkString(editBOCold.getText().toString()) && checkString(editBOHot.getText().toString()) 
+			&& checkString(editPriceCold.getText().toString()) && checkString(editPriceHot.getText().toString());
+    }		
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		btnClearData = (Button) findViewById(R.id.buttonClearData); 
 		btnSaveData = (Button) findViewById(R.id.buttonSaveData);
 		textOvlValue = (TextView) findViewById(R.id.textOverallValue);
+		textOldDate = (TextView) findViewById(R.id.textOldDate);
 		// навешиваем обработчик
 		btnCalc.setOnClickListener(this);
 		btnClearData.setOnClickListener(this);		
@@ -92,6 +98,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	    editBOHot.setText(sData.getString(BATHROOM_HOT, ""));
 	    editPriceCold.setText(sData.getString(PRICE_COLD, ""));
 	    editPriceHot.setText(sData.getString(PRICE_HOT, ""));
+	    textOldDate.setText(sData.getString(DATE, ""));
 	}
 	
 	// общий обработчик нажатия кнопок
@@ -111,23 +118,28 @@ public class MainActivity extends Activity implements OnClickListener {
     		fPCold = Float.parseFloat(editPriceCold.getText().toString());
     		fPHot = Float.parseFloat(editPriceHot.getText().toString());
     		// расчёт
-    		iResCold = Math.round(((fKNCold - fKOCold) * fPCold) + ((fBNCold - fBOCold) * fPCold));
-    		iResHot = Math.round(((fKNHot - fKOHot) * fPHot) + ((fBNHot - fBOHot) * fPHot));
-    		// вывод данных на форму
-    		editResultCold.setText(Integer.toString(iResCold));
-    		editResultHot.setText(Integer.toString(iResHot));
-    		textOvlValue.setText(Integer.toString(iResCold + iResHot));
+    		if (checkAllInput()) {
+        		iResCold = Math.round(((fKNCold - fKOCold) * fPCold) + ((fBNCold - fBOCold) * fPCold));
+        		iResHot = Math.round(((fKNHot - fKOHot) * fPHot) + ((fBNHot - fBOHot) * fPHot));
+        		// вывод данных на форму
+        		editResultCold.setText(Integer.toString(iResCold));
+        		editResultHot.setText(Integer.toString(iResHot));
+        		textOvlValue.setText(Integer.toString(iResCold + iResHot));    			
+    		} else {
+		    	Toast.makeText(this, "НЕКОРРЕКТНЫЕ ДАННЫЕ", Toast.LENGTH_SHORT).show();    			
+    		}
 	      	break;
 	    case R.id.buttonClearData:
 	    	// обнуление
         	editKOCold.setText("0");
         	editKOHot.setText("0");
         	editBOCold.setText("0");
-        	editBOHot.setText("0");	        			    	
+        	editBOHot.setText("0");
+        	textOldDate.setText("");
 	      	break;
 	    case R.id.buttonSaveData:
 	    	// сохранение показаний
-	    	if (checkNInput()) {
+	    	if (checkNewInput()) {
 		    	sData = getPreferences(MODE_PRIVATE);
 		    	Editor ed = sData.edit();
 		    	ed.putString(KITCHEN_COLD, editKNCold.getText().toString());
@@ -136,6 +148,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		    	ed.putString(BATHROOM_HOT, editBNHot.getText().toString());
 		    	ed.putString(PRICE_COLD, editPriceCold.getText().toString());
 		    	ed.putString(PRICE_HOT, editPriceHot.getText().toString());
+		    	ed.putString(DATE, DateFormat.format("yyyy.MM.dd",new Date()).toString());		    	
 		    	ed.commit();
 		    	Toast.makeText(this, "Показания счётчиков сохранены", Toast.LENGTH_SHORT).show();	    		
 	    	} else {
