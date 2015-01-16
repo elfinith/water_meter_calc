@@ -3,6 +3,8 @@ package com.elfinith.water_meter_calc;
 import java.util.Date;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -107,18 +109,18 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.buttonCalc:
 			// загрузка данных с формы
-			fKOCold = Float.parseFloat(editKOCold.getText().toString());
-			fKOHot = Float.parseFloat(editKOHot.getText().toString());
-			fKNCold = Float.parseFloat(editKNCold.getText().toString());
-			fKNHot = Float.parseFloat(editKNHot.getText().toString());
-			fBOCold = Float.parseFloat(editBOCold.getText().toString());
-			fBOHot = Float.parseFloat(editBOHot.getText().toString());
-			fBNCold = Float.parseFloat(editBNCold.getText().toString());
-			fBNHot = Float.parseFloat(editBNHot.getText().toString());
-			fPCold = Float.parseFloat(editPriceCold.getText().toString());
-			fPHot = Float.parseFloat(editPriceHot.getText().toString());
 			// расчёт
 			if (checkAllInput()) {
+				fKOCold = Float.parseFloat(editKOCold.getText().toString());
+				fKOHot = Float.parseFloat(editKOHot.getText().toString());
+				fKNCold = Float.parseFloat(editKNCold.getText().toString());
+				fKNHot = Float.parseFloat(editKNHot.getText().toString());
+				fBOCold = Float.parseFloat(editBOCold.getText().toString());
+				fBOHot = Float.parseFloat(editBOHot.getText().toString());
+				fBNCold = Float.parseFloat(editBNCold.getText().toString());
+				fBNHot = Float.parseFloat(editBNHot.getText().toString());
+				fPCold = Float.parseFloat(editPriceCold.getText().toString());
+				fPHot = Float.parseFloat(editPriceHot.getText().toString());
 				iResCold = Math.round(((fKNCold - fKOCold) * fPCold) + ((fBNCold - fBOCold) * fPCold));
 				iResHot = Math.round(((fKNHot - fKOHot) * fPHot) + ((fBNHot - fBOHot) * fPHot));
 				// вывод данных на форму
@@ -126,16 +128,30 @@ public class MainActivity extends Activity implements OnClickListener {
 				editResultHot.setText(Integer.toString(iResHot));
 				textOvlValue.setText(Integer.toString(iResCold + iResHot));    			
 			} else {
-				Toast.makeText(this, "НЕКОРРЕКТНЫЕ ДАННЫЕ", Toast.LENGTH_SHORT).show();    			
+				Toast.makeText(this, R.string.invalid_data, Toast.LENGTH_SHORT).show();    			
 			}
 			break;
 		case R.id.buttonClearData:
-			// обнуление
-			editKOCold.setText("0");
-			editKOHot.setText("0");
-			editBOCold.setText("0");
-			editBOHot.setText("0");
-			textOldDate.setText("");
+			// обнуление			
+			new AlertDialog.Builder(this)
+			.setTitle(R.string.warning)
+			.setMessage(R.string.clear_confirmation)
+			.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) { 
+					editKOCold.setText("0");
+					editKOHot.setText("0");
+					editBOCold.setText("0");
+					editBOHot.setText("0");
+					textOldDate.setText("");
+				}
+			})
+			.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) { 
+					// do nothing
+				}
+			})
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.show();
 			break;
 		case R.id.buttonSaveData:
 			// сохранение показаний
@@ -150,13 +166,13 @@ public class MainActivity extends Activity implements OnClickListener {
 				ed.putString(PRICE_HOT, editPriceHot.getText().toString());
 				ed.putString(DATE, DateFormat.format("yyyy.MM.dd",new Date()).toString());		    	
 				ed.commit();
-				Toast.makeText(this, "Показания счётчиков сохранены", Toast.LENGTH_SHORT).show();	    		
+				Toast.makeText(this, R.string.data_saved, Toast.LENGTH_SHORT).show();	    		
 			} else {
-				Toast.makeText(this, "НЕКОРРЕКТНЫЕ ПОКАЗАНИЯ", Toast.LENGTH_SHORT).show();	    		
+				Toast.makeText(this, R.string.invalid_data, Toast.LENGTH_SHORT).show();	    		
 			}
 			break;
 		default:
 			break;
 		}
-	}		
+	}	
 }

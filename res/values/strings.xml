@@ -18,5 +18,12 @@
     <string name="textOverall">Итоговая сумма</string>
     <string name="cold">холодная</string>
     <string name="hot">горячая</string>
-
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="warning">Предупреждение</string>
+    <string name="clear_confirmation">Вы действительно хотите очистить данные?</string>
+    <string name="invalid_data">НЕКОРРЕКТНЫЕ ДАННЫЕ</string>
+    <string name="data_saved">Показания счётчиков сохранены</string>
+            
+        
 </resources>
