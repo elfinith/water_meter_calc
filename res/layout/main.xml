@@ -1,299 +1,329 @@
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        <Button
-            android:id="@+id/buttonClearData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:layout_weight="1"            
-            android:text="@string/buttonClearData">             			
-        </Button>
-        <Button
-            android:id="@+id/buttonSaveData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:layout_weight="1"            
-            android:text="@string/buttonSaveData">
-		</Button>            
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            <Button
+                android:id="@+id/buttonClearData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/buttonClearData" >
+            </Button>
+
+            <Button
+                android:id="@+id/buttonSaveData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/buttonSaveData" >
+            </Button>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textOldDate"
+                android:layout_width="0.5in"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/textCold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@color/cold"
+                android:gravity="center"
+                android:text="@string/cold"
+                android:textAlignment="gravity" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/textHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@color/hot"
+                android:gravity="center"
+                android:text="@string/hot"
+                android:textAlignment="gravity" >
+            </TextView>
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/textOldDate"
-            android:layout_width="0.5in"
+            android:id="@+id/textKitchen"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-			android:layout_weight="1">            
+            android:gravity="center"
+            android:text="@string/textKitchen"
+            android:textSize="25dip" >
         </TextView>
 
-        <TextView
-            android:id="@+id/textCold"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-			android:background="@color/cold"            
-			android:text="@string/cold"
-			android:gravity="center"
-			android:textAlignment="gravity"			
-			android:layout_weight="3">
-        </TextView>        
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textKOld"
+                android:layout_width="0.5in"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textKOld" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editKitchenOldCold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/editKitchenOldHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textKNew"
+                android:layout_width="0.5in"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textKNew" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editKitchenNewCold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/editKitchenNewHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/textHot"
-            android:layout_width="wrap_content"
+            android:id="@+id/textBathroom"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-			android:background="@color/hot"
-			android:text="@string/hot"
-			android:gravity="center"
-			android:textAlignment="gravity"			
-			android:layout_weight="3">            
-        </TextView>        
+            android:gravity="center"
+            android:text="@string/textBathroom"
+            android:textSize="25dip" >
+        </TextView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textBOld"
+                android:layout_width="0.5in"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textBOld" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editBathroomOldCold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/editBathroomOldHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textBNew"
+                android:layout_width="0.5in"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textBNew" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editBathroomNewCold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/editBathroomNewHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/textPrice"
+            android:textAlignment="gravity"
+            android:textSize="25dip" >
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textPRub"
+                android:layout_width="0.5in"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textPRub" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editPriceCold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/editPriceHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonCalc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonCalc" >
+        </Button>
+
+        <TextView
+            android:id="@+id/textResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/textResult"
+            android:textSize="25dip" >
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textRRub"
+                android:layout_width="0.5in"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textRRub" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/editResultCold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@color/cold"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/editResultHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@color/hot"
+                android:gravity="center"
+                android:textAlignment="gravity" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textOverall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textOverall"
+                android:textSize="20dip" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/textOverallValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textSize="20dip" >
+            </TextView>
+        </LinearLayout>
     </LinearLayout>
- 
-	<TextView
-	    android:id="@+id/textKitchen"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-		android:gravity="center"	    
-		android:textSize="25dip"	    
-	    android:text="@string/textKitchen" >
-				
-	</TextView>
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-		android:orientation="horizontal">
-		<TextView
-			android:id="@+id/textKOld"
-			android:layout_width="0.5in"
-			android:layout_height="wrap_content"			
-			android:layout_weight="1"			
-			android:text="@string/textKOld">
-		</TextView>			
-	    <EditText
- 			android:id="@+id/editKitchenOldCold"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>
-	    <EditText
- 			android:id="@+id/editKitchenOldHot"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3">			
-		</EditText>    
-	</LinearLayout>
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-		android:orientation="horizontal">
-		<TextView
-			android:id="@+id/textKNew"
-			android:layout_width="0.5in"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"			
-			android:text="@string/textKNew">
-		</TextView>			
-	    <EditText
- 			android:id="@+id/editKitchenNewCold"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>
-	    <EditText
- 			android:id="@+id/editKitchenNewHot"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>    
-	</LinearLayout>
-		
-	<TextView
-		android:id="@+id/textBathroom"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center"		
-		android:textSize="25dip"		
-		android:text="@string/textBathroom">		
-	</TextView>
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-		android:orientation="horizontal">
-		<TextView
-			android:id="@+id/textBOld"
-			android:layout_width="0.5in"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"			
-			android:text="@string/textBOld">
-		</TextView>			
-	    <EditText
- 			android:id="@+id/editBathroomOldCold"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3">	
-		</EditText>
-	    <EditText
- 			android:id="@+id/editBathroomOldHot"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>    
-	</LinearLayout>
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-		android:orientation="horizontal">
-		<TextView
-			android:id="@+id/textBNew"
-			android:layout_width="0.5in"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"			
-			android:text="@string/textBNew">
-		</TextView>			
-	    <EditText
- 			android:id="@+id/editBathroomNewCold"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>
-	    <EditText
- 			android:id="@+id/editBathroomNewHot"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>    
-	</LinearLayout>
-	
 
-	<TextView
-		android:id="@+id/textPrice"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center"		
-		android:textAlignment="gravity"		
-		android:textSize="25dip"				
-		android:text="@string/textPrice">
-	</TextView>
-		
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-		android:orientation="horizontal">
-		<TextView
-			android:id="@+id/textPRub"
-			android:layout_width="0.5in"
-			android:layout_height="wrap_content"		
-			android:text="@string/textPRub"
-			android:layout_weight="1">			
-		</TextView>	    	    
-	    <EditText
- 			android:id="@+id/editPriceCold"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>
-	    <EditText
- 			android:id="@+id/editPriceHot"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>			    
-	</LinearLayout>
-
-	<Button
-	    android:id="@+id/buttonCalc"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/buttonCalc"> 
-	 </Button>
-				
-	<TextView
-		android:id="@+id/textResult"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center"		
-		android:textSize="25dip"		
-		android:text="@string/textResult">
-	</TextView>
-	
-		<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-		android:orientation="horizontal">
-		<TextView
-			android:id="@+id/textRRub"
-			android:layout_width="0.5in"
-			android:layout_height="wrap_content"		
-			android:text="@string/textRRub"
-			android:layout_weight="1">			
-		</TextView>	    	    
-	    <EditText
- 			android:id="@+id/editResultCold"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:background="@color/cold"
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>
-	    <EditText
- 			android:id="@+id/editResultHot"
- 			android:layout_width="wrap_content"
- 			android:layout_height="wrap_content"
-			android:background="@color/hot" 			
-			android:gravity="center"
-			android:textAlignment="gravity"
-			android:layout_weight="3"> 			
-		</EditText>			    
-	</LinearLayout>
-
-		<LinearLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content" >
-
-			<TextView
-			    android:id="@+id/textOverall"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-				android:layout_weight="1"			    
-			    android:text="@string/textOverall">
-			</TextView>
-			<TextView
-			    android:id="@+id/textOverallValue"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-				android:gravity="center"			    
-				android:layout_weight="3">			    
-			</TextView>
-		</LinearLayout>
-	
-</LinearLayout>
+</ScrollView>
