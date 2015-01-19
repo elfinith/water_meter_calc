@@ -24,6 +24,7 @@
     <string name="clear_confirmation">Вы действительно хотите очистить данные?</string>
     <string name="invalid_data">НЕКОРРЕКТНЫЕ ДАННЫЕ</string>
     <string name="data_saved">Показания счётчиков сохранены</string>
+    <string name="save_data">Сохранить данные?</string>    
             
         
 </resources>

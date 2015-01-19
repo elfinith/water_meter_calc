@@ -50,7 +50,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		} catch (Exception e) {
 			return false;
 		}
-		return true;
+		return string != "";
 	}	
 
 	// проверка корректности новых данных
@@ -64,7 +64,21 @@ public class MainActivity extends Activity implements OnClickListener {
 		return checkNewInput() && checkString(editKOCold.getText().toString()) && checkString(editKOHot.getText().toString())
 				&& checkString(editBOCold.getText().toString()) && checkString(editBOHot.getText().toString()) 
 				&& checkString(editPriceCold.getText().toString()) && checkString(editPriceHot.getText().toString());
-	}		
+	}
+
+	// сохранение текущих показаний и цены
+	public void saveData() {
+		sData = getPreferences(MODE_PRIVATE);
+		Editor ed = sData.edit();
+		ed.putString(KITCHEN_COLD, editKNCold.getText().toString());
+		ed.putString(KITCHEN_HOT, editKNHot.getText().toString());
+		ed.putString(BATHROOM_COLD, editBNCold.getText().toString());
+		ed.putString(BATHROOM_HOT, editBNHot.getText().toString());
+		ed.putString(PRICE_COLD, editPriceCold.getText().toString());
+		ed.putString(PRICE_HOT, editPriceHot.getText().toString());
+		ed.putString(DATE, DateFormat.format("yyyy.MM.dd",new Date()).toString());		    	
+		ed.commit();		
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -156,16 +170,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.buttonSaveData:
 			// сохранение показаний
 			if (checkNewInput()) {
-				sData = getPreferences(MODE_PRIVATE);
-				Editor ed = sData.edit();
-				ed.putString(KITCHEN_COLD, editKNCold.getText().toString());
-				ed.putString(KITCHEN_HOT, editKNHot.getText().toString());
-				ed.putString(BATHROOM_COLD, editBNCold.getText().toString());
-				ed.putString(BATHROOM_HOT, editBNHot.getText().toString());
-				ed.putString(PRICE_COLD, editPriceCold.getText().toString());
-				ed.putString(PRICE_HOT, editPriceHot.getText().toString());
-				ed.putString(DATE, DateFormat.format("yyyy.MM.dd",new Date()).toString());		    	
-				ed.commit();
+				saveData();
 				Toast.makeText(this, R.string.data_saved, Toast.LENGTH_SHORT).show();	    		
 			} else {
 				Toast.makeText(this, R.string.invalid_data, Toast.LENGTH_SHORT).show();	    		
@@ -175,4 +180,30 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}	
+
+	@Override
+	public void onBackPressed() {
+		if (checkNewInput()) {
+			new AlertDialog.Builder(this)
+			.setTitle(R.string.warning)
+			.setMessage(R.string.save_data)
+			.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					saveData();
+					finish();					
+				}
+			})
+			.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					finish();					
+				}
+			})
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.show();				
+		} else {
+			finish();
+		}
+		
+	}
+	
 }
