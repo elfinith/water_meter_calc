@@ -1,5 +1,6 @@
 package com.elfinith.water_meter_calc;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
@@ -26,14 +27,15 @@ public class MainActivity extends Activity implements OnClickListener {
 	final String BATHROOM_HOT = "bathroom_hot";	
 	final String PRICE_COLD = "price_cold";	
 	final String PRICE_HOT = "price_hot";	
-	final String DATE = "date";	
+	final String DATE = "date";
+	final String strDateFormat = "yyyy.MM.dd";
 
 	EditText 
 	editKOCold, editKOHot, editKNCold, editKNHot,
 	editBOCold, editBOHot, 	editBNCold, editBNHot,
 	editPriceCold, editPriceHot, editResultCold, editResultHot;
 
-	TextView textOvlValue, textOldDate;
+	TextView textOvlValue, textOldDate, textFCValue;
 
 	Button btnCalc, btnClearData, btnSaveData;
 
@@ -76,7 +78,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		ed.putString(BATHROOM_HOT, editBNHot.getText().toString());
 		ed.putString(PRICE_COLD, editPriceCold.getText().toString());
 		ed.putString(PRICE_HOT, editPriceHot.getText().toString());
-		ed.putString(DATE, DateFormat.format("yyyy.MM.dd",new Date()).toString());		    	
+		ed.putString(DATE, DateFormat.format(strDateFormat,new Date()).toString());		    	
 		ed.commit();		
 	}
 
@@ -102,6 +104,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		btnSaveData = (Button) findViewById(R.id.buttonSaveData);
 		textOvlValue = (TextView) findViewById(R.id.textOverallValue);
 		textOldDate = (TextView) findViewById(R.id.textOldDate);
+		textFCValue = (TextView) findViewById(R.id.textForecastValue);		
 		// навешиваем обработчик
 		btnCalc.setOnClickListener(this);
 		btnClearData.setOnClickListener(this);		
@@ -135,8 +138,31 @@ public class MainActivity extends Activity implements OnClickListener {
 				fBNHot = Float.parseFloat(editBNHot.getText().toString());
 				fPCold = Float.parseFloat(editPriceCold.getText().toString());
 				fPHot = Float.parseFloat(editPriceHot.getText().toString());
+				// вычисление стоимости
 				iResCold = Math.round(((fKNCold - fKOCold) * fPCold) + ((fBNCold - fBOCold) * fPCold));
 				iResHot = Math.round(((fKNHot - fKOHot) * fPHot) + ((fBNHot - fBOHot) * fPHot));
+				// вычисление прогноза
+				if (textOldDate.getText().toString() != "") {
+					SimpleDateFormat format = new SimpleDateFormat(strDateFormat);				
+					Date dateOld = null;
+					Date dateNew = null;
+					try {
+						dateOld = format.parse(textOldDate.getText().toString());
+						dateNew = new Date();
+					} catch (Exception e) {
+						Toast.makeText(this, R.string.date_parsing_error, Toast.LENGTH_SHORT).show();
+					}				
+					long difference = dateNew.getTime() - dateOld.getTime();
+					if (difference > 0 ) {
+						int days = (int) difference / (24 * 60 * 60 * 1000);
+						textFCValue.setText(Integer.toString((Math.round(30 * (iResCold + iResHot)) / days)));
+
+					} else {
+						Toast.makeText(this, R.string.div_by_0, Toast.LENGTH_SHORT).show();						
+					}																		
+				} else {
+					textFCValue.setText(R.string.div_by_0);					
+				}					
 				// вывод данных на форму
 				editResultCold.setText(Integer.toString(iResCold));
 				editResultHot.setText(Integer.toString(iResHot));
@@ -203,7 +229,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		} else {
 			finish();
 		}
-		
+
 	}
-	
+
 }

@@ -305,7 +305,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
             <TextView
                 android:id="@+id/textOverall"
                 android:layout_width="wrap_content"
@@ -314,7 +313,6 @@
                 android:text="@string/textOverall"
                 android:textSize="20dip" >
             </TextView>
-
             <TextView
                 android:id="@+id/textOverallValue"
                 android:layout_width="wrap_content"
@@ -324,6 +322,27 @@
                 android:textSize="20dip" >
             </TextView>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/textForecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textForecast"
+                android:textSize="20dip" >
+            </TextView>
+            <TextView
+                android:id="@+id/textForecastValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textSize="20dip" >
+            </TextView>
+        </LinearLayout>
+        
     </LinearLayout>
 
 </ScrollView>

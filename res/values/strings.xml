@@ -16,6 +16,7 @@
     <string name="buttonClearData">Очистить данные</string>
     <string name="buttonSaveData">Сохранить данные</string>
     <string name="textOverall">Итоговая сумма</string>
+    <string name="textForecast">Месячный прогноз</string>    
     <string name="cold">холодная</string>
     <string name="hot">горячая</string>
     <string name="yes">Да</string>
@@ -25,6 +26,7 @@
     <string name="invalid_data">НЕКОРРЕКТНЫЕ ДАННЫЕ</string>
     <string name="data_saved">Показания счётчиков сохранены</string>
     <string name="save_data">Сохранить данные?</string>    
-            
+    <string name="div_by_0">Недостаточно дней для расчёта прогноза</string>            
+    <string name="date_parsing_error">Ошибка при обработке дат</string>    
         
 </resources>
