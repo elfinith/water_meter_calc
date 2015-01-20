@@ -64,6 +64,12 @@
             </TextView>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+        </LinearLayout>
+
         <TextView
             android:id="@+id/textKitchen"
             android:layout_width="match_parent"
@@ -322,6 +328,7 @@
                 android:textSize="20dip" >
             </TextView>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -332,7 +339,7 @@
                 android:layout_weight="1"
                 android:text="@string/textForecast"
                 android:textSize="20dip" >
-            </TextView>
+            </TextView>               
             <TextView
                 android:id="@+id/textForecastValue"
                 android:layout_width="wrap_content"
@@ -342,7 +349,6 @@
                 android:textSize="20dip" >
             </TextView>
         </LinearLayout>
-        
     </LinearLayout>
 
 </ScrollView>
