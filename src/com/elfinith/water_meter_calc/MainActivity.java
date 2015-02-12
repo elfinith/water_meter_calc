@@ -5,9 +5,14 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -29,11 +34,18 @@ public class MainActivity extends Activity implements OnClickListener {
 	final String PRICE_HOT = "price_hot";	
 	final String DATE = "date";
 	final String strDateFormat = "yyyy.MM.dd";
+	final String strDatabaseName = "water_meter_calc_DB";
+	final String strMeasuresTableName = "measures";
+	final String strCreateTableSQL = 
+		"create table " + strMeasuresTableName  + " (id integer primary key autoincrement, "
+		+ "date text, kcold text, khot text, bcold text, bhot text, prcold text, prhot text);";
+
+	DBHelper dbHelper;	
 
 	EditText 
-	editKOCold, editKOHot, editKNCold, editKNHot,
-	editBOCold, editBOHot, 	editBNCold, editBNHot,
-	editPriceCold, editPriceHot, editResultCold, editResultHot;
+		editKOCold, editKOHot, editKNCold, editKNHot,
+		editBOCold, editBOHot, 	editBNCold, editBNHot,
+		editPriceCold, editPriceHot, editResultCold, editResultHot;
 
 	TextView textOvlValue, textOldDate, textFCValue;
 
@@ -79,13 +91,73 @@ public class MainActivity extends Activity implements OnClickListener {
 		ed.putString(PRICE_COLD, editPriceCold.getText().toString());
 		ed.putString(PRICE_HOT, editPriceHot.getText().toString());
 		ed.putString(DATE, DateFormat.format(strDateFormat,new Date()).toString());		    	
-		ed.commit();		
+		ed.commit();
+		
+		// ПОШЛА ПЛЯСКА С БД
+		dbHelper = new DBHelper(this);		
+	    // создаем объект для данных
+	    ContentValues cv = new ContentValues();		
+	    // подключаемся к БД
+	    SQLiteDatabase db = dbHelper.getWritableDatabase();
+	    // данные
+	    cv.put("date", DateFormat.format(strDateFormat,new Date()).toString());
+	    cv.put("kcold", editKNCold.getText().toString());
+	    cv.put("khot", editKNHot.getText().toString());	    
+	    cv.put("bcold", editBNCold.getText().toString());
+	    cv.put("bhot", editBNHot.getText().toString());
+	    cv.put("prcold", editPriceCold.getText().toString());
+	    cv.put("prhot", editPriceHot.getText().toString());	    
+        // вставляем запись и получаем ее ID
+	    long rowID = db.insert(strMeasuresTableName, null, cv);
+		Toast.makeText(this, "row inserted, ID = " + rowID, Toast.LENGTH_SHORT).show();
+	    // закрываем подключение к БД
+	    dbHelper.close();		
+	}
+	
+	// загрузка данных на форму
+	public void loadData() {		
+		// ПОШЛА ПЛЯСКА С БД
+		dbHelper = new DBHelper(this);
+	    // подключаемся к БД
+	    SQLiteDatabase db = dbHelper.getWritableDatabase();
+	    Cursor c = db.query(strMeasuresTableName, null, null, null, null, null, null);
+	    if (c.moveToLast()) {
+	        // определяем номера столбцов по имени в выборке
+	        int idColIndex = c.getColumnIndex("id");
+	        int dateColIndex = c.getColumnIndex("date");	        
+	        int kcoldColIndex = c.getColumnIndex("kcold");
+	        int khotColIndex = c.getColumnIndex("khot");
+	        int bcoldColIndex = c.getColumnIndex("bcold");
+	        int bhotColIndex = c.getColumnIndex("bhot");
+	        int prcoldColIndex = c.getColumnIndex("prcold");
+	        int prhotColIndex = c.getColumnIndex("prhot");	        
+	        // заполняем форму
+	        editKOCold.setText(c.getString(kcoldColIndex));
+	        editKOHot.setText(c.getString(khotColIndex));
+			editBOCold.setText(c.getString(bcoldColIndex));
+			editBOHot.setText(c.getString(bhotColIndex));
+			editPriceCold.setText(c.getString(prcoldColIndex));
+			editPriceHot.setText(c.getString(prhotColIndex));
+			textOldDate.setText(c.getString(dateColIndex));				        	    	
+	    } else {
+			Toast.makeText(this, "No rows in DB, prefs loaded", Toast.LENGTH_SHORT).show();
+			sData = getPreferences(MODE_PRIVATE);
+			editKOCold.setText(sData.getString(KITCHEN_COLD, ""));
+			editKOHot.setText(sData.getString(KITCHEN_HOT, ""));
+			editBOCold.setText(sData.getString(BATHROOM_COLD, ""));
+			editBOHot.setText(sData.getString(BATHROOM_HOT, ""));
+			editPriceCold.setText(sData.getString(PRICE_COLD, ""));
+			editPriceHot.setText(sData.getString(PRICE_HOT, ""));
+			textOldDate.setText(sData.getString(DATE, ""));			
+	    }
+	    // закрываем подключение к БД
+	    dbHelper.close();		
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.main);		
 		// цепляемся за вьюхи
 		editKOCold = (EditText) findViewById(R.id.editKitchenOldCold);
 		editKOHot = (EditText) findViewById(R.id.editKitchenOldHot);		
@@ -104,20 +176,13 @@ public class MainActivity extends Activity implements OnClickListener {
 		btnSaveData = (Button) findViewById(R.id.buttonSaveData);
 		textOvlValue = (TextView) findViewById(R.id.textOverallValue);
 		textOldDate = (TextView) findViewById(R.id.textOldDate);
-		textFCValue = (TextView) findViewById(R.id.textForecastValue);		
+		textFCValue = (TextView) findViewById(R.id.textForecastValue);					
 		// навешиваем обработчик
 		btnCalc.setOnClickListener(this);
 		btnClearData.setOnClickListener(this);		
 		btnSaveData.setOnClickListener(this);
 		// заполняем поля
-		sData = getPreferences(MODE_PRIVATE);
-		editKOCold.setText(sData.getString(KITCHEN_COLD, ""));
-		editKOHot.setText(sData.getString(KITCHEN_HOT, ""));
-		editBOCold.setText(sData.getString(BATHROOM_COLD, ""));
-		editBOHot.setText(sData.getString(BATHROOM_HOT, ""));
-		editPriceCold.setText(sData.getString(PRICE_COLD, ""));
-		editPriceHot.setText(sData.getString(PRICE_HOT, ""));
-		textOldDate.setText(sData.getString(DATE, ""));
+		loadData();				
 	}
 
 	// общий обработчик нажатия кнопок
@@ -231,5 +296,23 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 
 	}
+	
+	class DBHelper extends SQLiteOpenHelper {
+		
+		public DBHelper(Context context) {
+			super (context, strDatabaseName, null, 1);
+		}
+		
+		@Override
+		public void onCreate(SQLiteDatabase db) {
+			db.execSQL(strCreateTableSQL);
+		}
+		
+		@Override
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			
+		}
+	}
+
 
 }
