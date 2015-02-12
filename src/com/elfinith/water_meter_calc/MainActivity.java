@@ -122,23 +122,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	    SQLiteDatabase db = dbHelper.getWritableDatabase();
 	    Cursor c = db.query(strMeasuresTableName, null, null, null, null, null, null);
 	    if (c.moveToLast()) {
-	        // определяем номера столбцов по имени в выборке
-	        int idColIndex = c.getColumnIndex("id");
-	        int dateColIndex = c.getColumnIndex("date");	        
-	        int kcoldColIndex = c.getColumnIndex("kcold");
-	        int khotColIndex = c.getColumnIndex("khot");
-	        int bcoldColIndex = c.getColumnIndex("bcold");
-	        int bhotColIndex = c.getColumnIndex("bhot");
-	        int prcoldColIndex = c.getColumnIndex("prcold");
-	        int prhotColIndex = c.getColumnIndex("prhot");	        
 	        // заполняем форму
-	        editKOCold.setText(c.getString(kcoldColIndex));
-	        editKOHot.setText(c.getString(khotColIndex));
-			editBOCold.setText(c.getString(bcoldColIndex));
-			editBOHot.setText(c.getString(bhotColIndex));
-			editPriceCold.setText(c.getString(prcoldColIndex));
-			editPriceHot.setText(c.getString(prhotColIndex));
-			textOldDate.setText(c.getString(dateColIndex));				        	    	
+	        editKOCold.setText(c.getString(c.getColumnIndex("kcold")));
+	        editKOHot.setText(c.getString(c.getColumnIndex("khot")));
+			editBOCold.setText(c.getString(c.getColumnIndex("bcold")));
+			editBOHot.setText(c.getString(c.getColumnIndex("bhot")));
+			editPriceCold.setText(c.getString(c.getColumnIndex("prcold")));
+			editPriceHot.setText(c.getString(c.getColumnIndex("prhot")));
+			textOldDate.setText(c.getString(c.getColumnIndex("date")));				        	    	
 	    } else {
 			Toast.makeText(this, "No rows in DB, prefs loaded", Toast.LENGTH_SHORT).show();
 			sData = getPreferences(MODE_PRIVATE);
