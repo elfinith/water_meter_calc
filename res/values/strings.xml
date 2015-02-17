@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Расчёт воды</string>
+    <string name="app_name">Расчёт показаний счётчиков</string>
+	<string name="text_tab1">Вода</string>
+	<string name="text_tab2">Электроэнергия</string>
+	<string name="text_tab3">Газ</string>    
     <string name="textKitchen">Кухня</string>
     <string name="textKOld">Старые</string>
     <string name="textKNew">Новые</string>
@@ -27,6 +30,8 @@
     <string name="data_saved">Показания счётчиков сохранены</string>
     <string name="save_data">Сохранить данные?</string>    
     <string name="div_by_0">Недостаточно дней для расчёта прогноза</string>            
-    <string name="date_parsing_error">Ошибка при обработке дат</string>    
+    <string name="date_parsing_error">Ошибка при обработке дат</string>
+    <string name="emptyDB">В БД пусто, загружено из параметров </string>    
+        
         
 </resources>

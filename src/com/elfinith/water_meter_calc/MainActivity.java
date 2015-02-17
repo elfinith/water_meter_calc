@@ -19,12 +19,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 
 	SharedPreferences sData;
+	DBHelper dbHelper;	
 
 	final String KITCHEN_COLD = "kitchen_cold";
 	final String KITCHEN_HOT = "kitchen_hot";
@@ -38,9 +41,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	final String strMeasuresTableName = "measures";
 	final String strCreateTableSQL = 
 		"create table " + strMeasuresTableName  + " (id integer primary key autoincrement, "
-		+ "date text, kcold text, khot text, bcold text, bhot text, prcold text, prhot text);";
-
-	DBHelper dbHelper;	
+		+ "date text, kcold text, khot text, bcold text, bhot text, prcold text, prhot text);";	
 
 	EditText 
 		editKOCold, editKOHot, editKNCold, editKNHot,
@@ -57,7 +58,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	int iResCold, iResHot;
 
-	// проверка строки на число
+	// РїСЂРѕРІРµСЂРєР° СЃС‚СЂРѕРєРё РЅР° С‡РёСЃР»Рѕ
 	public boolean checkString(String string) {
 		try {
 			Float.parseFloat(string);
@@ -67,20 +68,20 @@ public class MainActivity extends Activity implements OnClickListener {
 		return string != "";
 	}	
 
-	// проверка корректности новых данных
+	// РїСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РЅРѕРІС‹С… РґР°РЅРЅС‹С…
 	public boolean checkNewInput() {
 		return checkString(editKNCold.getText().toString()) && checkString(editKNHot.getText().toString())
 				&& checkString(editBNCold.getText().toString()) && checkString(editBNHot.getText().toString()); 
 	}
 
-	// проверка корректности всех данных
+	// РїСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РІСЃРµС… РґР°РЅРЅС‹С…
 	public boolean checkAllInput() {
 		return checkNewInput() && checkString(editKOCold.getText().toString()) && checkString(editKOHot.getText().toString())
 				&& checkString(editBOCold.getText().toString()) && checkString(editBOHot.getText().toString()) 
 				&& checkString(editPriceCold.getText().toString()) && checkString(editPriceHot.getText().toString());
 	}
 
-	// сохранение текущих показаний и цены
+	// СЃРѕС…СЂР°РЅРµРЅРёРµ С‚РµРєСѓС‰РёС… РїРѕРєР°Р·Р°РЅРёР№ Рё С†РµРЅС‹
 	public void saveData() {
 		sData = getPreferences(MODE_PRIVATE);
 		Editor ed = sData.edit();
@@ -93,13 +94,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		ed.putString(DATE, DateFormat.format(strDateFormat,new Date()).toString());		    	
 		ed.commit();
 		
-		// ПОШЛА ПЛЯСКА С БД
+		// РџРћРЁР›Рђ РџР›РЇРЎРљРђ РЎ Р‘Р”
 		dbHelper = new DBHelper(this);		
-	    // создаем объект для данных
 	    ContentValues cv = new ContentValues();		
-	    // подключаемся к БД
 	    SQLiteDatabase db = dbHelper.getWritableDatabase();
-	    // данные
 	    cv.put("date", DateFormat.format(strDateFormat,new Date()).toString());
 	    cv.put("kcold", editKNCold.getText().toString());
 	    cv.put("khot", editKNHot.getText().toString());	    
@@ -107,22 +105,22 @@ public class MainActivity extends Activity implements OnClickListener {
 	    cv.put("bhot", editBNHot.getText().toString());
 	    cv.put("prcold", editPriceCold.getText().toString());
 	    cv.put("prhot", editPriceHot.getText().toString());	    
-        // вставляем запись и получаем ее ID
+        // РІСЃС‚Р°РІР»СЏРµРј Р·Р°РїРёСЃСЊ Рё РїРѕР»СѓС‡Р°РµРј РµРµ ID
 	    long rowID = db.insert(strMeasuresTableName, null, cv);
 		Toast.makeText(this, "row inserted, ID = " + rowID, Toast.LENGTH_SHORT).show();
-	    // закрываем подключение к БД
+	    // Р·Р°РєСЂС‹РІР°РµРј РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р‘Р”
 	    dbHelper.close();		
 	}
 	
-	// загрузка данных на форму
+	// Р·Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РЅР° С„РѕСЂРјСѓ
 	public void loadData() {		
-		// ПОШЛА ПЛЯСКА С БД
+		// РџРћРЁР›Рђ РџР›РЇРЎРљРђ РЎ Р‘Р”
 		dbHelper = new DBHelper(this);
-	    // подключаемся к БД
+	    // РїРѕРґРєР»СЋС‡Р°РµРјСЃСЏ Рє Р‘Р”
 	    SQLiteDatabase db = dbHelper.getWritableDatabase();
 	    Cursor c = db.query(strMeasuresTableName, null, null, null, null, null, null);
 	    if (c.moveToLast()) {
-	        // заполняем форму
+	        // Р·Р°РїРѕР»РЅСЏРµРј С„РѕСЂРјСѓ
 	        editKOCold.setText(c.getString(c.getColumnIndex("kcold")));
 	        editKOHot.setText(c.getString(c.getColumnIndex("khot")));
 			editBOCold.setText(c.getString(c.getColumnIndex("bcold")));
@@ -131,7 +129,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			editPriceHot.setText(c.getString(c.getColumnIndex("prhot")));
 			textOldDate.setText(c.getString(c.getColumnIndex("date")));				        	    	
 	    } else {
-			Toast.makeText(this, "No rows in DB, prefs loaded", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.emptyDB, Toast.LENGTH_SHORT).show();
 			sData = getPreferences(MODE_PRIVATE);
 			editKOCold.setText(sData.getString(KITCHEN_COLD, ""));
 			editKOHot.setText(sData.getString(KITCHEN_HOT, ""));
@@ -141,15 +139,54 @@ public class MainActivity extends Activity implements OnClickListener {
 			editPriceHot.setText(sData.getString(PRICE_HOT, ""));
 			textOldDate.setText(sData.getString(DATE, ""));			
 	    }
-	    // закрываем подключение к БД
+	    // Р·Р°РєСЂС‹РІР°РµРј РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р‘Р”
 	    dbHelper.close();		
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);		
-		// цепляемся за вьюхи
+		setContentView(R.layout.main);
+		// СЃРѕР·РґР°С‘Рј РІРєР»Р°РґРєРё
+        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
+        tabHost.setup();
+        
+        TabHost.TabSpec tabSpec;
+
+        // СЃРѕР·РґР°РµРј РІРєР»Р°РґРєСѓ Рё СѓРєР°Р·С‹РІР°РµРј С‚РµРі
+        tabSpec = tabHost.newTabSpec("tag1");
+        // РЅР°Р·РІР°РЅРёРµ РІРєР»Р°РґРєРё
+        tabSpec.setIndicator("РІРѕРґР°");
+        // СѓРєР°Р·С‹РІР°РµРј id РєРѕРјРїРѕРЅРµРЅС‚Р° РёР· FrameLayout, РѕРЅ Рё СЃС‚Р°РЅРµС‚ СЃРѕРґРµСЂР¶РёРјС‹Рј
+        tabSpec.setContent(R.id.tab1);
+        // РґРѕР±Р°РІР»СЏРµРј РІ РєРѕСЂРЅРµРІРѕР№ СЌР»РµРјРµРЅС‚
+        tabHost.addTab(tabSpec);
+        
+        tabSpec = tabHost.newTabSpec("tag2");
+        // СѓРєР°Р·С‹РІР°РµРј РЅР°Р·РІР°РЅРёРµ Рё РєР°СЂС‚РёРЅРєСѓ
+        // РІ РЅР°С€РµРј СЃР»СѓС‡Р°Рµ РІРјРµСЃС‚Рѕ РєР°СЂС‚РёРЅРєРё РёРґРµС‚ xml-С„Р°Р№Р», 
+        // РєРѕС‚РѕСЂС‹Р№ РѕРїСЂРµРґРµР»СЏРµС‚ РєР°СЂС‚РёРЅРєСѓ РїРѕ СЃРѕСЃС‚РѕСЏРЅРёСЋ РІРєР»Р°РґРєРё
+        tabSpec.setIndicator("СЃРІРµС‚", getResources().getDrawable(R.drawable.tab_icon_selector));
+        tabSpec.setContent(R.id.tab2);        
+        tabHost.addTab(tabSpec);
+        
+        tabSpec = tabHost.newTabSpec("tag3");
+        tabSpec.setIndicator("РіР°Р·", getResources().getDrawable(R.drawable.tab_icon_selector));
+        tabSpec.setContent(R.id.tab3);        
+        tabHost.addTab(tabSpec);
+                
+        // РїРµСЂРІР°СЏ РІРєР»Р°РґРєР° Р±СѓРґРµС‚ РІС‹Р±СЂР°РЅР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+        tabHost.setCurrentTabByTag("tag1");
+        
+        // РѕР±СЂР°Р±РѕС‚С‡РёРє РїРµСЂРµРєР»СЋС‡РµРЅРёСЏ РІРєР»Р°РґРѕРє
+        tabHost.setOnTabChangedListener(new OnTabChangeListener() {
+        	public void onTabChanged(String tabId) {
+        		Toast.makeText(getBaseContext(), "tabId = " + tabId, Toast.LENGTH_SHORT).show();
+        	}
+        });        	
+		
+		// С†РµРїР»СЏРµРјСЃСЏ Р·Р° РІСЊСЋС…Рё
 		editKOCold = (EditText) findViewById(R.id.editKitchenOldCold);
 		editKOHot = (EditText) findViewById(R.id.editKitchenOldHot);		
 		editKNCold = (EditText) findViewById(R.id.editKitchenNewCold);
@@ -168,21 +205,20 @@ public class MainActivity extends Activity implements OnClickListener {
 		textOvlValue = (TextView) findViewById(R.id.textOverallValue);
 		textOldDate = (TextView) findViewById(R.id.textOldDate);
 		textFCValue = (TextView) findViewById(R.id.textForecastValue);					
-		// навешиваем обработчик
+		// РЅР°РІРµС€РёРІР°РµРј РѕР±СЂР°Р±РѕС‚С‡РёРє
 		btnCalc.setOnClickListener(this);
 		btnClearData.setOnClickListener(this);		
 		btnSaveData.setOnClickListener(this);
-		// заполняем поля
+		// Р·Р°РїРѕР»РЅСЏРµРј РїРѕР»СЏ
 		loadData();				
 	}
 
-	// общий обработчик нажатия кнопок
+	// РѕР±С‰РёР№ РѕР±СЂР°Р±РѕС‚С‡РёРє РЅР°Р¶Р°С‚РёСЏ РєРЅРѕРїРѕРє
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonCalc:
-			// загрузка данных с формы
-			// расчёт
+			// СЂР°СЃС‡С‘С‚
 			if (checkAllInput()) {
 				fKOCold = Float.parseFloat(editKOCold.getText().toString());
 				fKOHot = Float.parseFloat(editKOHot.getText().toString());
@@ -194,10 +230,10 @@ public class MainActivity extends Activity implements OnClickListener {
 				fBNHot = Float.parseFloat(editBNHot.getText().toString());
 				fPCold = Float.parseFloat(editPriceCold.getText().toString());
 				fPHot = Float.parseFloat(editPriceHot.getText().toString());
-				// вычисление стоимости
+				// РІС‹С‡РёСЃР»РµРЅРёРµ СЃС‚РѕРёРјРѕСЃС‚Рё
 				iResCold = Math.round(((fKNCold - fKOCold) * fPCold) + ((fBNCold - fBOCold) * fPCold));
 				iResHot = Math.round(((fKNHot - fKOHot) * fPHot) + ((fBNHot - fBOHot) * fPHot));
-				// вычисление прогноза
+				// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРѕРіРЅРѕР·Р°
 				if (textOldDate.getText().toString() != "") {
 					SimpleDateFormat format = new SimpleDateFormat(strDateFormat);				
 					Date dateOld = null;
@@ -219,7 +255,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				} else {
 					textFCValue.setText(R.string.div_by_0);					
 				}					
-				// вывод данных на форму
+				// РІС‹РІРѕРґ РґР°РЅРЅС‹С… РЅР° С„РѕСЂРјСѓ
 				editResultCold.setText(Integer.toString(iResCold));
 				editResultHot.setText(Integer.toString(iResHot));
 				textOvlValue.setText(Integer.toString(iResCold + iResHot));    			
@@ -228,7 +264,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.buttonClearData:
-			// обнуление			
+			// РѕР±РЅСѓР»РµРЅРёРµ						
 			new AlertDialog.Builder(this)
 			.setTitle(R.string.warning)
 			.setMessage(R.string.clear_confirmation)
@@ -250,7 +286,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			.show();
 			break;
 		case R.id.buttonSaveData:
-			// сохранение показаний
+			// СЃРѕС…СЂР°РЅРµРЅРёРµ РїРѕРєР°Р·Р°РЅРёР№
 			if (checkNewInput()) {
 				saveData();
 				Toast.makeText(this, R.string.data_saved, Toast.LENGTH_SHORT).show();	    		
