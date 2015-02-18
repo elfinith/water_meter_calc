@@ -5,6 +5,7 @@
 	<string name="text_tab1">Вода</string>
 	<string name="text_tab2">Электроэнергия</string>
 	<string name="text_tab3">Газ</string>    
+	<string name="text_tab4">История</string>	
     <string name="textKitchen">Кухня</string>
     <string name="textKOld">Старые</string>
     <string name="textKNew">Новые</string>
