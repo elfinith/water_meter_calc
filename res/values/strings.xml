@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">Расчёт показаний счётчиков</string>
-	<string name="text_tab1">Вода</string>
-	<string name="text_tab2">Электроэнергия</string>
-	<string name="text_tab3">Газ</string>    
-	<string name="text_tab4">История</string>	
+    <string name="text_tab1">Вода</string>
+    <string name="text_tab2">Свет</string>
+    <string name="text_tab3">Газ</string>
+    <string name="text_tab4">История</string>
     <string name="textKitchen">Кухня</string>
     <string name="textKOld">Старые</string>
     <string name="textKNew">Новые</string>
@@ -19,8 +19,9 @@
     <string name="buttonCalc">Произвести расчёт</string>
     <string name="buttonClearData">Очистить данные</string>
     <string name="buttonSaveData">Сохранить данные</string>
+    <string name="buttonPurgeDB">Очистить БД</string>    
     <string name="textOverall">Итоговая сумма</string>
-    <string name="textForecast">Прогноз расхода за месяц</string>    
+    <string name="textForecast">Прогноз расхода за месяц</string>
     <string name="cold">холодная</string>
     <string name="hot">горячая</string>
     <string name="yes">Да</string>
@@ -29,10 +30,14 @@
     <string name="clear_confirmation">Вы действительно хотите очистить данные?</string>
     <string name="invalid_data">НЕКОРРЕКТНЫЕ ДАННЫЕ</string>
     <string name="data_saved">Показания счётчиков сохранены</string>
-    <string name="save_data">Сохранить данные?</string>    
-    <string name="div_by_0">Недостаточно дней для расчёта прогноза</string>            
+    <string name="save_data">Сохранить данные?</string>
+    <string name="div_by_0">Недостаточно дней для расчёта прогноза</string>
     <string name="date_parsing_error">Ошибка при обработке дат</string>
-    <string name="emptyDB">В БД пусто, загружено из параметров </string>    
+    <string name="emptyDB">В БД пусто, загружено из параметров </string>
+    <string name="dateFormat">yyyy.MM.dd</string>    
+    <string name="databaseName">water_meter_calc_DB</string>    
+    <string name="tableNameMeasures">measures</string>
+	<string name="sqlCreateTableMeasures">create table measures (id integer primary key autoincrement, date text, kcold text, khot text, bcold text, bhot text, prcold text, prhot text);</string>    
         
-        
+
 </resources>

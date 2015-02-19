@@ -23,6 +23,12 @@
             </intent-filter>
         </activity>
         <activity android:name="com.elfinith.water_meter_calc.tab1Activity"></activity>
+        <activity android:name="com.elfinith.water_meter_calc.tab2Activity"></activity>
+        <activity android:name="com.elfinith.water_meter_calc.tab3Activity"></activity>
+        <activity android:name="com.elfinith.water_meter_calc.tab4Activity"></activity>
+        <activity android:name="com.elfinith.water_meter_calc.tab41Activity"></activity>
+        <activity android:name="com.elfinith.water_meter_calc.tab42Activity"></activity>                
+        <activity android:name="com.elfinith.water_meter_calc.tab43Activity"></activity>        
         
     </application>    
 

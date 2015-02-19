@@ -34,12 +34,8 @@ public class tab1Activity extends Activity implements OnClickListener {
 	final String PRICE_COLD = "price_cold";	
 	final String PRICE_HOT = "price_hot";	
 	final String DATE = "date";
-	final String strDateFormat = "yyyy.MM.dd";
-	final String strDatabaseName = "water_meter_calc_DB";
-	final String strMeasuresTableName = "measures";
-	final String strCreateTableSQL = 
-		"create table " + strMeasuresTableName  + " (id integer primary key autoincrement, "
-		+ "date text, kcold text, khot text, bcold text, bhot text, prcold text, prhot text);";	
+	
+	String strDateFormat, strDatabaseName, strMeasuresTableName, strCreateMeasuresTableSQL;    	
 
 	EditText 
 		editKOCold, editKOHot, editKNCold, editKNHot,
@@ -144,6 +140,11 @@ public class tab1Activity extends Activity implements OnClickListener {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.tab1);
+    
+	strDateFormat = getBaseContext().getString(R.string.dateFormat);
+	strDatabaseName = getBaseContext().getString(R.string.databaseName);
+	strMeasuresTableName = getBaseContext().getString(R.string.tableNameMeasures);
+	strCreateMeasuresTableSQL = getBaseContext().getString(R.string.sqlCreateTableMeasures);    
     
 	// цепляемся за вьюхи
 	editKOCold = (EditText) findViewById(R.id.editKitchenOldCold);
@@ -291,7 +292,7 @@ public class tab1Activity extends Activity implements OnClickListener {
 		
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			db.execSQL(strCreateTableSQL);
+			db.execSQL(strCreateMeasuresTableSQL);
 		}
 		
 		@Override

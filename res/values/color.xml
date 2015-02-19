@@ -3,5 +3,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="cold">#ace5ee</color>
-    <color name="hot">#ffc1cc</color>    
+    <color name="hot">#ffc1cc</color>
+    <color name="blizzard">#ace5ee</color>    
+        
 </resources>
