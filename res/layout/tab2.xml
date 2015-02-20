@@ -4,5 +4,164 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonEClearData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/buttonClearData" />
+
+            <Button
+                android:id="@+id/buttonESaveData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/buttonSaveData" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textElectricity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/textElectricity"
+            android:textSize="25dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textEOld"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textEOld" />
+
+        <EditText
+            android:id="@+id/editEOld"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:inputType="phone"
+            android:textAlignment="gravity" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textENew" />
+
+        <EditText
+            android:id="@+id/editENew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:inputType="phone"
+            android:textAlignment="gravity" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/textEPrice"
+        android:textSize="25dip" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textEPriceKW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textEPriceKW" />
+
+        <EditText
+            android:id="@+id/editEPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:inputType="phone"
+            android:textAlignment="gravity" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonECalc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonCalc" />
+
+    <TextView
+        android:id="@+id/textResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/textResult"
+        android:textSize="25dip" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textOverall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textOverall"
+            android:textSize="20dip" />
+
+        <TextView
+            android:id="@+id/textEOverallValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textSize="20dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textForecast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textForecast"
+            android:textSize="20dip" />
+
+        <TextView
+            android:id="@+id/textEForecastValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textSize="20dip" />
+    </LinearLayout>
 
 </LinearLayout>

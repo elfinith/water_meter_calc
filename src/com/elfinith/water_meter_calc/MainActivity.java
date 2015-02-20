@@ -39,14 +39,13 @@ public class MainActivity extends TabActivity{
 		tabSpec.setContent(new Intent(this, tab4Activity.class));        
 		tabHost.addTab(tabSpec);
 
-
 		// первая вкладка будет выбрана по умолчанию
 		tabHost.setCurrentTabByTag("tag1");
 
 		// обработчик переключения вкладок
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			public void onTabChanged(String tabId) {
-				Toast.makeText(getBaseContext(), "tabId = " + tabId, Toast.LENGTH_SHORT).show();
+				// Toast.makeText(getBaseContext(), "tabId = " + tabId, Toast.LENGTH_SHORT).show();
 			}
 		});        	
 

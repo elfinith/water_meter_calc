@@ -6,13 +6,11 @@ import java.util.Date;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -35,7 +33,7 @@ public class tab1Activity extends Activity implements OnClickListener {
 	final String PRICE_HOT = "price_hot";	
 	final String DATE = "date";
 	
-	String strDateFormat, strDatabaseName, strMeasuresTableName, strCreateMeasuresTableSQL;    	
+	String strDateFormat;    	
 
 	EditText 
 		editKOCold, editKOHot, editKNCold, editKNHot,
@@ -100,7 +98,7 @@ public class tab1Activity extends Activity implements OnClickListener {
 	    cv.put("prcold", editPriceCold.getText().toString());
 	    cv.put("prhot", editPriceHot.getText().toString());	    
         // вставляем запись и получаем ее ID
-	    long rowID = db.insert(strMeasuresTableName, null, cv);
+	    long rowID = db.insert(getBaseContext().getString(R.string.tableNameMeasures), null, cv);
 		Toast.makeText(this, "row inserted, ID = " + rowID, Toast.LENGTH_SHORT).show();
 	    // закрываем подключение к БД
 	    dbHelper.close();		
@@ -112,7 +110,7 @@ public class tab1Activity extends Activity implements OnClickListener {
 		dbHelper = new DBHelper(this);
 	    // подключаемся к БД
 	    SQLiteDatabase db = dbHelper.getWritableDatabase();
-	    Cursor c = db.query(strMeasuresTableName, null, null, null, null, null, null);
+	    Cursor c = db.query(getBaseContext().getString(R.string.tableNameMeasures), null, null, null, null, null, null);
 	    if (c.moveToLast()) {
 	        // заполняем форму
 	        editKOCold.setText(c.getString(c.getColumnIndex("kcold")));
@@ -142,9 +140,6 @@ public class tab1Activity extends Activity implements OnClickListener {
     setContentView(R.layout.tab1);
     
 	strDateFormat = getBaseContext().getString(R.string.dateFormat);
-	strDatabaseName = getBaseContext().getString(R.string.databaseName);
-	strMeasuresTableName = getBaseContext().getString(R.string.tableNameMeasures);
-	strCreateMeasuresTableSQL = getBaseContext().getString(R.string.sqlCreateTableMeasures);    
     
 	// цепляемся за вьюхи
 	editKOCold = (EditText) findViewById(R.id.editKitchenOldCold);
@@ -281,26 +276,7 @@ public class tab1Activity extends Activity implements OnClickListener {
 		} else {
 			finish();
 		}
-	}
-	
-
-	class DBHelper extends SQLiteOpenHelper {
-		
-		public DBHelper(Context context) {
-			super (context, strDatabaseName, null, 1);
-		}
-		
-		@Override
-		public void onCreate(SQLiteDatabase db) {
-			db.execSQL(strCreateMeasuresTableSQL);
-		}
-		
-		@Override
-		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			
-		}
-	}
-	
+	}		
 	
 }
 

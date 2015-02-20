@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 
 public class tab41Activity extends Activity {
 
@@ -44,13 +43,13 @@ public class tab41Activity extends Activity {
 	    Cursor c = db.query(strMeasuresTableName, null, null, null, null, null, null);
 	    
 	    data = new ArrayList<String>();
-	    data.add("дата");
-	    data.add("кх");
-	    data.add("кг");
-	    data.add("вх");
-	    data.add("вг");
+	    data.add(getBaseContext().getString(R.string.tab41date));
+	    data.add(getBaseContext().getString(R.string.tab41kCold));
+	    data.add(getBaseContext().getString(R.string.tab41kHot));
+	    data.add(getBaseContext().getString(R.string.tab41bCold));
+	    data.add(getBaseContext().getString(R.string.tab41bHot));
 	    
-	    if (c.moveToNext()) {
+	    while (c.moveToNext()) {
 	    	data.add(c.getString(c.getColumnIndex("date")));	    	
 	    	data.add(c.getString(c.getColumnIndex("kcold")));
 	    	data.add(c.getString(c.getColumnIndex("khot")));
@@ -62,7 +61,6 @@ public class tab41Activity extends Activity {
 		gvMain = (CustomGridView) findViewById(R.id.gvMain);
 		gvMain.setAdapter(adapter);
 		adjustGridView();				
-
 	}
 
 	class DBHelper extends SQLiteOpenHelper {

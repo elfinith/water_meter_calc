@@ -16,10 +16,15 @@
     <string name="textPRub">Руб/куб.м</string>
     <string name="textResult">ИТОГ</string>
     <string name="textRRub">Руб</string>
+    <string name="textElectricity">Электроэнергия</string>
+    <string name="textEOld">Старые </string>        
+    <string name="textENew">Новые </string>    
+    <string name="textEPrice">Цена</string>    
+	<string name="textEPriceKW">Руб/квтч</string>    
     <string name="buttonCalc">Произвести расчёт</string>
     <string name="buttonClearData">Очистить данные</string>
     <string name="buttonSaveData">Сохранить данные</string>
-    <string name="buttonPurgeDB">Очистить БД</string>    
+    <string name="buttonPurgeDB">Очистить БД</string>
     <string name="textOverall">Итоговая сумма</string>
     <string name="textForecast">Прогноз расхода за месяц</string>
     <string name="cold">холодная</string>
@@ -34,10 +39,18 @@
     <string name="div_by_0">Недостаточно дней для расчёта прогноза</string>
     <string name="date_parsing_error">Ошибка при обработке дат</string>
     <string name="emptyDB">В БД пусто, загружено из параметров </string>
-    <string name="dateFormat">yyyy.MM.dd</string>    
-    <string name="databaseName">water_meter_calc_DB</string>    
+    <string name="dateFormat">yyyy.MM.dd</string>
+    <string name="databaseName">water_meter_calc_DB</string>
     <string name="tableNameMeasures">measures</string>
-	<string name="sqlCreateTableMeasures">create table measures (id integer primary key autoincrement, date text, kcold text, khot text, bcold text, bhot text, prcold text, prhot text);</string>    
-        
+    <string name="tableNameElectricity">electricity</string>    
+	<string name="tableNameGas">gas</string>    
+    <string name="sqlCreateTableMeasures">create table measures (id integer primary key autoincrement, date text, kcold text, khot text, bcold text, bhot text, prcold text, prhot text);</string>
+    <string name="sqlCreateTableElectricity">create table if not exists electricity (id integer primary key autoincrement, date text, value text, price text);</string>    
+    <string name="sqlCreateTableGas">create table gas (id integer primary key autoincrement, date text, value text, price text);</string>    
+    <string name="tab41date">дата</string>
+    <string name="tab41kCold">кх</string>
+    <string name="tab41kHot">кг</string>
+    <string name="tab41bCold">вх</string>
+    <string name="tab41bHot">вг</string>
 
 </resources>

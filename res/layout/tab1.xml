@@ -94,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"                
                 android:textAlignment="gravity" >
             </EditText>
 
@@ -103,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"                
                 android:textAlignment="gravity" >
             </EditText>
         </LinearLayout>
@@ -126,6 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"
                 android:textAlignment="gravity" >
             </EditText>
 
@@ -135,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"                
                 android:textAlignment="gravity" >
             </EditText>
         </LinearLayout>
@@ -167,6 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"                
                 android:textAlignment="gravity" >
             </EditText>
 
@@ -176,6 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"                
                 android:textAlignment="gravity" >
             </EditText>
         </LinearLayout>
@@ -199,6 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"                
                 android:textAlignment="gravity" >
             </EditText>
 
@@ -208,6 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"                
                 android:textAlignment="gravity" >
             </EditText>
         </LinearLayout>
@@ -241,6 +249,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"                
                 android:textAlignment="gravity" >
             </EditText>
 
@@ -250,6 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="center"
+                android:inputType="phone"                
                 android:textAlignment="gravity" >
             </EditText>
         </LinearLayout>
