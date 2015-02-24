@@ -17,10 +17,15 @@
     <string name="textResult">ИТОГ</string>
     <string name="textRRub">Руб</string>
     <string name="textElectricity">Электроэнергия</string>
+    <string name="textGas">Газ</string>    
     <string name="textEOld">Старые </string>        
     <string name="textENew">Новые </string>    
     <string name="textEPrice">Цена</string>    
 	<string name="textEPriceKW">Руб/квтч</string>    
+    <string name="textGOld">Старые </string>        
+    <string name="textGNew">Новые </string>    
+    <string name="textGPrice">Цена</string>    
+	<string name="textGPriceM3">Руб/куб.м</string>		
     <string name="buttonCalc">Произвести расчёт</string>
     <string name="buttonClearData">Очистить данные</string>
     <string name="buttonSaveData">Сохранить данные</string>
@@ -45,7 +50,7 @@
     <string name="tableNameElectricity">electricity</string>    
 	<string name="tableNameGas">gas</string>    
     <string name="sqlCreateTableMeasures">create table measures (id integer primary key autoincrement, date text, kcold text, khot text, bcold text, bhot text, prcold text, prhot text);</string>
-    <string name="sqlCreateTableElectricity">create table if not exists electricity (id integer primary key autoincrement, date text, value text, price text);</string>    
+    <string name="sqlCreateTableElectricity">create table electricity (id integer primary key autoincrement, date text, value text, price text);</string>    
     <string name="sqlCreateTableGas">create table gas (id integer primary key autoincrement, date text, value text, price text);</string>    
     <string name="tab41date">дата</string>
     <string name="tab41kCold">кх</string>
