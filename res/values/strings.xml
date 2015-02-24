@@ -57,5 +57,10 @@
     <string name="tab41kHot">кг</string>
     <string name="tab41bCold">вх</string>
     <string name="tab41bHot">вг</string>
-
+    <string name="tab42date">дата</string>
+    <string name="tab42Value">показания</string>
+    <string name="tab42Price">цена</string>    
+    <string name="tab43date">дата</string>
+    <string name="tab43Value">показания</string>
+    <string name="tab43Price">цена</string>    
 </resources>

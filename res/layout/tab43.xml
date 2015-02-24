@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView43"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <com.elfinith.water_meter_calc.CustomGridView
+        android:id="@+id/gvGMain"
+        android:background="@color/white"
+		android:gravity="center"
+		android:textAlignment="gravity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />    
 
 </LinearLayout>
