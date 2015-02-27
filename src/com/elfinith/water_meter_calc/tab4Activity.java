@@ -49,7 +49,7 @@ public class tab4Activity extends TabActivity implements OnClickListener {
 		// обработчик переключения вкладок
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			public void onTabChanged(String tabId) {
-				Toast.makeText(getBaseContext(), "tabId = " + tabId, Toast.LENGTH_SHORT).show();
+
 			}
 		});        	
 		

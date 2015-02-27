@@ -199,7 +199,33 @@ public class tab2Activity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
-	}	
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if (checkString(editEOld.getText().toString()) && checkString(editENew.getText().toString())
+				&& checkString(editEPrice.getText().toString())) {
+			new AlertDialog.Builder(this)
+			.setTitle(R.string.warning)
+			.setMessage(R.string.save_data)
+			.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					saveData();
+					finish();					
+				}
+			})
+			.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					finish();					
+				}
+			})
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.show();				
+		} else {
+			finish();
+		}
+	}		
+	
 
 
 }

@@ -100,8 +100,6 @@ public class tab3Activity extends Activity implements OnClickListener {
 		dbHelper.close();		
 	}
 
-
-
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab3);
@@ -129,7 +127,7 @@ public class tab3Activity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.buttonECalc:
+		case R.id.buttonGCalc:
 			if (checkString(editGOld.getText().toString()) && checkString(editGNew.getText().toString())
 					&& checkString(editGPrice.getText().toString())) 
 			{
@@ -165,7 +163,7 @@ public class tab3Activity extends Activity implements OnClickListener {
 				Toast.makeText(this, R.string.invalid_data, Toast.LENGTH_SHORT).show();    			
 			}
 			break;
-		case R.id.buttonEClearData:
+		case R.id.buttonGClearData:
 			// обнуление						
 			new AlertDialog.Builder(this)
 			.setTitle(R.string.warning)
@@ -188,7 +186,7 @@ public class tab3Activity extends Activity implements OnClickListener {
 			.show();
 			
 			break;
-		case R.id.buttonESaveData:
+		case R.id.buttonGSaveData:
 			// сохранение показаний
 			if (checkString(editGOld.getText().toString()) && checkString(editGNew.getText().toString())
 					&& checkString(editGPrice.getText().toString())) {
@@ -201,6 +199,32 @@ public class tab3Activity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
-	}	
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if (checkString(editGOld.getText().toString()) && checkString(editGNew.getText().toString())
+				&& checkString(editGPrice.getText().toString())) {
+			new AlertDialog.Builder(this)
+			.setTitle(R.string.warning)
+			.setMessage(R.string.save_data)
+			.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					saveData();
+					finish();					
+				}
+			})
+			.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					finish();					
+				}
+			})
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.show();				
+		} else {
+			finish();
+		}
+	}		
+	
 
 }
