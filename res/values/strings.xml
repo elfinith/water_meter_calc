@@ -63,4 +63,5 @@
     <string name="tab43date">дата</string>
     <string name="tab43Value">показания</string>
     <string name="tab43Price">цена</string>    
+    <string name="tab4Forecast">прогноз</string>    
 </resources>

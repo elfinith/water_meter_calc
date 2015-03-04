@@ -14,7 +14,7 @@
 		android:textAlignment="gravity"        
         android:minHeight="20dp"
         android:text=""
-        android:textSize="12sp" >
+        android:textSize="11sp" >
     </TextView>
 
 </LinearLayout>
