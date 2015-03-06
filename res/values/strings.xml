@@ -64,4 +64,5 @@
     <string name="tab43Value">показания</string>
     <string name="tab43Price">цена</string>    
     <string name="tab4Forecast">прогноз</string>    
+    <string name="tab4AvgText">В среднем в месяц</string>        
 </resources>
