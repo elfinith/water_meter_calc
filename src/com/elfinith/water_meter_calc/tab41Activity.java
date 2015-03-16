@@ -45,8 +45,8 @@ public class tab41Activity extends Activity {
 		dbHelper = new DBHelper(this);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		Cursor c = db.query(getBaseContext().getString(R.string.tableNameMeasures), null, null, null, null, null, null);
-		SimpleDateFormat format = new SimpleDateFormat(strDateFormat);	    
-
+		SimpleDateFormat format = new SimpleDateFormat(strDateFormat);	    		
+		
 		data = new ArrayList<String>();
 		data.add(getBaseContext().getString(R.string.tab41date));
 		data.add(getBaseContext().getString(R.string.tab41kCold));
@@ -121,7 +121,8 @@ public class tab41Activity extends Activity {
 			Toast.makeText(this, R.string.date_parsing_error, Toast.LENGTH_SHORT).show();
 			iAvgValue = 0;
 		}
-		adapter = new ArrayAdapter<String>(this, R.layout.item41, R.id.tvText, data);
+//		adapter = new ArrayAdapter<String>(this, R.layout.item41, R.id.tvText, data);
+		adapter = new WaterAdapter(this, R.layout.item41, R.id.tvText, data, iAvgValue);		
 		gvMain = (CustomGridView) findViewById(R.id.gvMain);
 		gvMain.setAdapter(adapter);
 		adjustGridView();

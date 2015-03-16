@@ -92,7 +92,8 @@ public class tab42Activity extends Activity {
 			Toast.makeText(this, R.string.date_parsing_error, Toast.LENGTH_SHORT).show();
 			iAvgValue = 0;
 		}	    		
-		adapter = new ArrayAdapter<String>(this, R.layout.item41, R.id.tvText, data);
+//		adapter = new ArrayAdapter<String>(this, R.layout.item41, R.id.tvText, data);
+		adapter = new ElectricityAdapter(this, R.layout.item41, R.id.tvText, data, iAvgValue);		
 		gvEMain = (CustomGridView) findViewById(R.id.gvEMain);
 		gvEMain.setAdapter(adapter);
 		adjustGridView();				
