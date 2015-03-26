@@ -110,7 +110,7 @@ public class tab41Activity extends Activity {
 			strOldDate = strDate;
 		}
 		try {
-			int ovldays = (int)(format.parse(strDate).getTime() - format.parse(strFirstDate).getTime()) / (24 * 60 * 60 * 1000);	    
+			long ovldays = (long)(format.parse(strDate).getTime() - format.parse(strFirstDate).getTime()) / (24 * 60 * 60 * 1000);	    
 			iAvgValue = Math.round(30 * (
 					((fKCold - fKCold0) * Float.parseFloat(strPCold)) 
 					+ ((fBCold - fBCold0) * Float.parseFloat(strPCold))
@@ -121,7 +121,6 @@ public class tab41Activity extends Activity {
 			Toast.makeText(this, R.string.date_parsing_error, Toast.LENGTH_SHORT).show();
 			iAvgValue = 0;
 		}
-//		adapter = new ArrayAdapter<String>(this, R.layout.item41, R.id.tvText, data);
 		adapter = new WaterAdapter(this, R.layout.item41, R.id.tvText, data, iAvgValue);		
 		gvMain = (CustomGridView) findViewById(R.id.gvMain);
 		gvMain.setAdapter(adapter);

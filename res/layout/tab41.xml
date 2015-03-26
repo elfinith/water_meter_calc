@@ -16,7 +16,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tab4AvgText"
-            android:textAlignment="gravity" />
+            android:textAlignment="gravity"
+            android:textColor="@color/black"
+            android:textSize="20dip" />
 
         <TextView
             android:id="@+id/tab41AvgValue"
@@ -24,7 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textAlignment="gravity" />
+            android:textAlignment="gravity"
+            android:textColor="@color/black"
+            android:textSize="20dip" />
     </LinearLayout>
 
     <com.elfinith.water_meter_calc.CustomGridView

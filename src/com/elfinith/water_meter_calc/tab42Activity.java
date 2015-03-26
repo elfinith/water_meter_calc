@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -67,7 +69,7 @@ public class tab42Activity extends Activity {
 			if (!((fValue == 0) && (fPrice == 0))) {	    		
 				try {
 					long difference = format.parse(strDate).getTime() - format.parse(strOldDate).getTime();
-					int days = (int) difference / (24 * 60 * 60 * 1000);
+					int days = (int)(difference / (24 * 60 * 60 * 1000));
 					if (days > 0 ) {						
 						iForecast = (Math.round(30 * Math.round((Float.parseFloat(strValue) - fValue) * Float.parseFloat(strPrice))) / days);						
 					}
@@ -83,16 +85,23 @@ public class tab42Activity extends Activity {
 			// сохранение предыдущих
 			fValue = Float.parseFloat(strValue);
 			fPrice = Float.parseFloat(strPrice);
-			strOldDate = strDate;	    	
+			strOldDate = strDate;
+			// debug section begin
+//			try {			
+//				Toast.makeText(this, "strValue=" + strValue + "; strPrice=" + strPrice + "; strOldDate=" + strOldDate + " ;strFirstDate=" + strFirstDate 
+//					+ "; olvdays=" + Long.toString((long)(format.parse(strDate).getTime() - format.parse(strFirstDate).getTime())), Toast.LENGTH_SHORT).show();						
+//			} catch (Exception e) {
+//				Toast.makeText(this, R.string.date_parsing_error, Toast.LENGTH_SHORT).show();
+//			}
+			// debug section end			
 		}    
 		try {
-			int ovldays = (int)(format.parse(strDate).getTime() - format.parse(strFirstDate).getTime()) / (24 * 60 * 60 * 1000);	    
+			long ovldays = (long)(format.parse(strDate).getTime() - format.parse(strFirstDate).getTime()) / (24 * 60 * 60 * 1000);	    
 			iAvgValue = Math.round(30 * (fValue - fValue0) * Float.parseFloat(strPrice) / ovldays);		
 		} catch (Exception e) {
 			Toast.makeText(this, R.string.date_parsing_error, Toast.LENGTH_SHORT).show();
 			iAvgValue = 0;
 		}	    		
-//		adapter = new ArrayAdapter<String>(this, R.layout.item41, R.id.tvText, data);
 		adapter = new ElectricityAdapter(this, R.layout.item41, R.id.tvText, data, iAvgValue);		
 		gvEMain = (CustomGridView) findViewById(R.id.gvEMain);
 		gvEMain.setAdapter(adapter);

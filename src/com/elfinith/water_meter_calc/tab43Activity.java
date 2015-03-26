@@ -67,7 +67,7 @@ public class tab43Activity extends Activity {
 			if (!((fValue == 0) && (fPrice == 0))) {	    		
 				try {
 					long difference = format.parse(strDate).getTime() - format.parse(strOldDate).getTime();
-					int days = (int) difference / (24 * 60 * 60 * 1000);
+					int days = (int) (difference / (24 * 60 * 60 * 1000));
 					if (days > 0 ) {						
 						iForecast = (Math.round(30 * Math.round((Float.parseFloat(strValue) - fValue) * Float.parseFloat(strPrice))) / days);						
 					}
@@ -86,20 +86,18 @@ public class tab43Activity extends Activity {
 			strOldDate = strDate;	    	
 		}
 		try {
-			int ovldays = (int)(format.parse(strDate).getTime() - format.parse(strFirstDate).getTime()) / (24 * 60 * 60 * 1000);								
+			long ovldays = (long)(format.parse(strDate).getTime() - format.parse(strFirstDate).getTime()) / (24 * 60 * 60 * 1000);								
 			iAvgValue = Math.round(30 * (fValue - fValue0) * Float.parseFloat(strPrice) / ovldays);		
 		} catch (Exception e) {
 			Toast.makeText(this, R.string.date_parsing_error, Toast.LENGTH_SHORT).show();
 			iAvgValue = 0;
 		}	    	    			
-//		adapter = new ArrayAdapter<String>(this, R.layout.item41, R.id.tvText, data);
 		adapter = new ElectricityAdapter(this, R.layout.item41, R.id.tvText, data, iAvgValue);		
 		gvGMain = (CustomGridView) findViewById(R.id.gvGMain);
 		gvGMain.setAdapter(adapter);
 		adjustGridView();				
 		tvAvgValue = (TextView) findViewById(R.id.tab43AvgValue);
-		tvAvgValue.setText(Integer.toString(iAvgValue));		
-		//		tvAvgValue.setText("30*("+Float.toString(fValue)+"-"+Float.toString(fValue0)+")*"+Float.parseFloat(strPrice)+"/"+Integer.toString(i)+"="+Integer.toString(iAvgValue));		
+		tvAvgValue.setText(Integer.toString(iAvgValue));				
 	}
 
 

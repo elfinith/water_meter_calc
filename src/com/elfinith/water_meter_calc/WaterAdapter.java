@@ -29,7 +29,7 @@ public class WaterAdapter extends ArrayAdapter<String> {
       if (((position + 1) % NUM_COLUMNS == 0) && (position > NUM_COLUMNS - 1)) {
     	  try {
         	  if (Float.parseFloat(this.getItem(position)) > AvgValue) {
-        		  view.setBackgroundColor(COLOR_RED);    		          		  
+        		  view.setBackgroundColor(COLOR_RED);
         	  }
         	  else {
         		  view.setBackgroundColor(COLOR_GREEN);    		  
